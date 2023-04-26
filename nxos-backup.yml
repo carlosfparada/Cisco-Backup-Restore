@@ -5,8 +5,24 @@
   - vars/main.yml
   tasks:
 
-  - name: Backup current NXOS configuration
+  - name: Backup current configuration
     nxos_config:
       backup: yes
       backup_options:
         dir_path: /tmp/
+  register: config
+
+  - name: Remove non-config lines 
+    lineinfile:
+      path: "{{ config_output.backup_path }}"
+      line: "Building configuration..."
+      state: absent
+    delegate_to: localhost
+
+  - name: Copy config to the backup server
+    copy:
+      src: "{{ config_output.backup_path }}"
+      dest: "/tmp/backup/{{ config_output.backup_path }}/"
+    become: true
+    delegate_to: backup-server
+
