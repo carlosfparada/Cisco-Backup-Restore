@@ -1,0 +1,12 @@
+- name: Backup Cisco NXOS
+  hosts: nxos
+  gather_facts: no
+  vars_files:
+  - vars/main.yml
+  tasks:
+
+  - name: Backup current NXOS configuration
+    nxos_config:
+      backup: yes
+      backup_options:
+        dir_path: /tmp/
