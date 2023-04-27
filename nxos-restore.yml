@@ -25,7 +25,7 @@
 
   - name: Fetch config from backup
     fetch:
-      src: "{{ backup_server_folder }}{{ backup_files[-1] }}"
+      src: "{{ backup_server_folder }}{{ backup_files | last }}"
       dest: "/tmp/"
       flat: true
     when: backup_files | length > 0 
