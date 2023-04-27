@@ -21,11 +21,11 @@
 
   - name: Debug files 
     debug: 
-      var: backup_files
+      msg: "{{ (backup_files.files|last).path }}"
 
   - name: Fetch config from backup
     fetch:
-      src: "{{ (backup_files.files | last).path }}"
+      src: "{{ (backup_files.files|last).path }}"
       dest: "/tmp/"
       flat: true
     when: backup_files | length > 0 
