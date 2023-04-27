@@ -25,7 +25,7 @@
       state: directory
     become: true
     delegate_to: backup-server
-      
+
   - name: Copy config to the backup server
     copy:
       src: "{{ config_output.backup_path }}"
