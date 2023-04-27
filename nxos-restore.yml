@@ -34,3 +34,6 @@
       ansible_user: "{{ backup_server_user }}"
       ansible_ssh_pass: "{{ backup_server_pass }}"
 
+  - name: Config nxos router
+    cisco.ios.ios_config:
+      src: "{{ backup_file }}"
