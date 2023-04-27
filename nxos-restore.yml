@@ -8,9 +8,9 @@
   - name: Find latest backup filename
     ansible.builtin.find:
       paths: "{{ backup_server_folder }}"
-      # file_type: file
-      # patterns: *
-      # use_regex: false
+      file_type: file
+      patterns: *
+      use_regex: false
     delegate_to: "{{ backup_server }}"
     become: yes
     vars:
