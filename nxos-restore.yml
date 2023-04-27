@@ -19,13 +19,13 @@
       ansible_ssh_pass: "{{ backup_server_pass }}"
     register: backup_files
 
-  - name: Debug files 
-    debug: 
-      msg: "{{ (backup_files.files|last).path }}"
+  - name: Get lastest backup ({{ (backup_files.files|last).path }})
+    set_fact: 
+      backup_file: "{{ (backup_files.files|last).path }}"
 
   - name: Fetch config from backup
     fetch:
-      src: "{{ (backup_files.files|last).path }}"
+      src: "{{ backup_file }}"
       dest: "/tmp/"
       flat: true
     when: backup_files | length > 0 
