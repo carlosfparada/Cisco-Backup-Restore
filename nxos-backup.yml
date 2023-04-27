@@ -37,6 +37,6 @@
 
   - name: Copy config to the backup server
     copy:
-      src: "{{ config.backup_path }}"
-      dest: "/tmp/backup/{{ config.backup_path }}/"
+      src: "{{ hostvars['nxos'].config.backup_path }}"
+      dest: "/tmp/backup/{{ hostvars['nxos'].config.backup_path }}/"
     become: true
