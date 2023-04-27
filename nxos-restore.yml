@@ -8,7 +8,7 @@
   - name: Find latest backup filename
     ansible.builtin.find:
       #paths: "{{ backup_server_folder }}"
-      paths: "/tmp/"
+      paths: "/"
       file_type: file
       patterns: '*'
       use_regex: false
