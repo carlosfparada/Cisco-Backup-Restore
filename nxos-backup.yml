@@ -19,24 +19,22 @@
       state: absent
     delegate_to: localhost
 
-- name: Copy Backup Server
-  hosts: "{{backup_server}}"
-  gather_facts: no
-  vars_files:
-  - vars/main.yml
-  vars:
-    ansible_user: "{{backup_server_user}}"
-    ansible_ssh_pass: "{{backup_server_pass}}"
-  tasks:
-
   - name: Create backup folder
     ansible.builtin.file:
       path: /tmp/backup/
       state: directory
     become: true
+    delegate_to: backup-server
+    vars:
+      ansible_user: "{{backup_server_user}}"
+      ansible_ssh_pass: "{{backup_server_pass}}"
 
   - name: Copy config to the backup server
     copy:
       src: "{{ hostvars['nxos'].config.backup_path }}"
       dest: "/tmp/backup/{{ hostvars['nxos'].config.backup_path }}/"
     become: true
+    delegate_to: backup-server
+    vars:
+      ansible_user: "{{backup_server_user}}"
+      ansible_ssh_pass: "{{backup_server_pass}}"
