@@ -8,9 +8,9 @@
   - name: Find latest backup filename
     ansible.builtin.find:
       paths: "{{ backup_server_folder }}"
-      file_type: any
-      patterns: '*'
-      hidden: true
+      file_type: file
+      # patterns: '*'
+      # hidden: true
       use_regex: false
     delegate_to: "{{ backup_server }}"
     become: yes
@@ -25,7 +25,7 @@
 
   - name: Fetch config from backup
     fetch:
-      src: "{{ backup_server_folder }}{{ backup_files | last }}"
+      src: "{{ (backup_files.files | last).path }}"
       dest: "/tmp/"
       flat: true
     when: backup_files | length > 0 
