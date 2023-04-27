@@ -5,7 +5,7 @@
   - vars/main.yml
   tasks:
 
-  - name: Backup current configuration
+  - name: Backup current config
     nxos_config:
       backup: yes
       backup_options:
@@ -19,7 +19,7 @@
       state: absent
     delegate_to: localhost
 
-  - name: Create backup folder
+  - name: Create backup folder on backup server
     ansible.builtin.file:
       path: "{{ backup_server_folder }}"
       state: directory
@@ -29,7 +29,7 @@
       ansible_user: "{{ backup_server_user }}"
       ansible_ssh_pass: "{{ backup_server_pass }}"
 
-  - name: Copy config to the backup server
+  - name: Copy config to backup server
     copy:
       src: "{{ config.backup_path }}"
       dest: "{{ backup_server_folder }}{{ config.filename }}/"
