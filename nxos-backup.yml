@@ -19,12 +19,20 @@
       state: absent
     delegate_to: localhost
 
+- name: Copy Backup Server
+  hosts: backup-server
+  gather_facts: no
+  "ansible_ssh_pass": "Cisco123",
+  "ansible_user": "admin",    
+  vars_files:
+  - vars/main.yml
+  tasks:
+
   - name: Create backup folder
     ansible.builtin.file:
       path: /tmp/backup/
       state: directory
     become: true
-    delegate_to: backup-server
 
   - name: Copy config to the backup server
     copy:
