@@ -5,12 +5,23 @@
   - vars/main.yml
   tasks:
 
+  - name: Find latest backup filename
+    ansible.builtin.find:
+      paths: "{{ backup_server_folder }}"
+      patterns: "^.*$"
+      use_regex: yes
+    delegate_to: "{{ backup_server }}"
+    vars:
+      ansible_user: "{{ backup_server_user }}"
+      ansible_ssh_pass: "{{ backup_server_pass }}"
+    register:
+
   - name: Fetch config from backup
     fetch:
-      path: "{{ backup_server_folder }}"
-      state: directory
-    become: true
-    delegate_to: backup-server
+      src: "{{ backup_server_folder }}"
+      dest: "/tmp/{{ rollback_date }}/"
+      flat: true
+    delegate_to: "{{ backup_server }}"
     vars:
       ansible_user: "{{ backup_server_user }}"
       ansible_ssh_pass: "{{ backup_server_pass }}"
@@ -20,7 +31,7 @@
       src: "{{ config.backup_path }}"
       dest: "{{ backup_server_folder }}{{ config.filename }}/"
     become: true
-    delegate_to: backup-server
+    delegate_to: "{{ backup_server }}"
     vars:
       ansible_user: "{{ backup_server_user }}"
       ansible_ssh_pass: "{{ backup_server_pass }}"
