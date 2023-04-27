@@ -39,6 +39,6 @@
       var: tmp_backup_file
 
   - name: Config nxos router with backup
-    cisco.ios.ios_config:
+    cisco.nxos.nxos_config:
       src: "{{ tmp_backup_file.dest }}"
       #save_when: changed
