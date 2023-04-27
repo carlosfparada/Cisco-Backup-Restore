@@ -37,3 +37,4 @@
   - name: Config nxos router with backup
     cisco.ios.ios_config:
       src: "{{ backup_file }}"
+      save_when: changed
