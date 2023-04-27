@@ -10,7 +10,7 @@
       backup: yes
       backup_options:
         dir_path: /tmp/
-  register: config
+    register: config
 
   - name: Remove non-config lines 
     lineinfile:
