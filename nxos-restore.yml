@@ -8,8 +8,8 @@
   - name: Find latest backup filename
     ansible.builtin.find:
       paths: "{{ backup_server_folder }}"
-      patterns: "^.*$"
-      use_regex: yes
+      #patterns: "^.*$"
+      #use_regex: yes
     delegate_to: "{{ backup_server }}"
     vars:
       ansible_user: "{{ backup_server_user }}"
@@ -17,7 +17,7 @@
     register: backup_files
 
   - debug: 
-      var: backup files
+      var: backup_files
 
   - name: Fetch config from backup
     fetch:
