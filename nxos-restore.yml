@@ -11,7 +11,8 @@
       paths: "/"
       file_type: file
       patterns: '*'
-      use_regex: false
+      hidden: true
+      use_regex: any
     delegate_to: "{{ backup_server }}"
     become: yes
     vars:
