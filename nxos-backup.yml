@@ -21,20 +21,20 @@
 
   - name: Create backup folder
     ansible.builtin.file:
-      path: /tmp/backup/
+      path: "{{ backup_server_folder }}"
       state: directory
     become: true
     delegate_to: backup-server
     vars:
-      ansible_user: "{{backup_server_user}}"
-      ansible_ssh_pass: "{{backup_server_pass}}"
+      ansible_user: "{{ backup_server_user }}"
+      ansible_ssh_pass: "{{ backup_server_pass }}"
 
   - name: Copy config to the backup server
     copy:
       src: "{{ config.backup_path }}"
-      dest: "/tmp/backup/{{ config.filename }}/"
+      dest: "{{ backup_server_folder }}{{ config.filename }}/"
     become: true
     delegate_to: backup-server
     vars:
-      ansible_user: "{{backup_server_user}}"
-      ansible_ssh_pass: "{{backup_server_pass}}"
+      ansible_user: "{{ backup_server_user }}"
+      ansible_ssh_pass: "{{ backup_server_pass }}"
