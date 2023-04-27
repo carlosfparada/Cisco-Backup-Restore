@@ -9,10 +9,10 @@
     ansible.builtin.find:
       #paths: "{{ backup_server_folder }}"
       paths: "/"
-      file_type: file
+      file_type: any
       patterns: '*'
       hidden: true
-      use_regex: any
+      use_regex: false
     delegate_to: "{{ backup_server }}"
     become: yes
     vars:
