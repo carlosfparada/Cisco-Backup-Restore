@@ -1,4 +1,4 @@
-- name: Backup Cisco NXOS
+- name: Backup Cisco NXOS to a server
   hosts: nxos
   gather_facts: no
   vars_files:
