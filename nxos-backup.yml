@@ -12,13 +12,6 @@
         dir_path: /tmp/
     register: config
 
-  # - name: Remove non-config lines 
-  #   lineinfile:
-  #     path: "{{ config.backup_path }}"
-  #     line: "Building configuration..."
-  #     state: absent
-  #   delegate_to: localhost
-
   - name: Create backup folder on backup server
     ansible.builtin.file:
       path: "{{ backup_server_folder }}"
