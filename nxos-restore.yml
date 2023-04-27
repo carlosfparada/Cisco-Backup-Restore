@@ -35,9 +35,6 @@
       ansible_ssh_pass: "{{ backup_server_pass }}"
     register: tmp_backup_file
 
-  - debug:
-      var: tmp_backup_file
-
   - name: Config nxos router with backup
     cisco.nxos.nxos_config:
       src: "{{ tmp_backup_file.dest }}"
