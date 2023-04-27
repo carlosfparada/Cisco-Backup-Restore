@@ -14,7 +14,7 @@
 
   - name: Remove non-config lines 
     lineinfile:
-      path: "{{ config_output.backup_path }}"
+      path: "{{ config.backup_path }}"
       line: "Building configuration..."
       state: absent
     delegate_to: localhost
