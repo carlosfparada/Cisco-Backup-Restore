@@ -11,6 +11,7 @@
       patterns: "^.*$"
       use_regex: yes
     delegate_to: "{{ backup_server }}"
+    become: yes
     vars:
       ansible_user: "{{ backup_server_user }}"
       ansible_ssh_pass: "{{ backup_server_pass }}"
@@ -24,6 +25,7 @@
       src: "{{ backup_server_folder }}{{ backup_files[-1] }}"
       dest: "/tmp/"
       flat: true
+    when: backup_files is defined
     delegate_to: "{{ backup_server }}"
     vars:
       ansible_user: "{{ backup_server_user }}"
