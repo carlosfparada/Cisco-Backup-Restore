@@ -18,7 +18,8 @@
       ansible_ssh_pass: "{{ backup_server_pass }}"
     register: backup_files
 
-  - debug: 
+  - name: Debug files 
+    debug: 
       var: backup_files
 
   - name: Fetch config from backup
