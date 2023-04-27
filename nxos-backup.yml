@@ -20,12 +20,13 @@
     delegate_to: localhost
 
 - name: Copy Backup Server
-  hosts: backup-server
+  hosts: "{{backup_server}}"
   gather_facts: no
-  "ansible_ssh_pass": "Cisco123",
-  "ansible_user": "admin",    
   vars_files:
   - vars/main.yml
+  vars:
+    ansible_user: "{{backup_server_user}}"
+    ansible_ssh_pass": "{{backup_server_pass}}"
   tasks:
 
   - name: Create backup folder
@@ -39,4 +40,3 @@
       src: "{{ config_output.backup_path }}"
       dest: "/tmp/backup/{{ config_output.backup_path }}/"
     become: true
-    delegate_to: backup-server
