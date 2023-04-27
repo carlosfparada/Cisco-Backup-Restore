@@ -32,7 +32,7 @@
   - name: Copy config to backup server
     copy:
       src: "{{ config.backup_path }}"
-      dest: "{{ backup_server_folder }}{{ config.filename }}/"
+      dest: "{{ backup_server_folder }}{{ config.filename }}"
     become: true
     delegate_to: "{{ backup_server }}"
     vars:
