@@ -41,4 +41,4 @@
   - name: Config nxos router with backup
     cisco.nxos.nxos_config:
       src: "{{ tmp_backup_file.dest }}"
-      #save_when: changed
+      save_when: changed
