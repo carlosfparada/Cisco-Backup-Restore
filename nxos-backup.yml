@@ -29,9 +29,6 @@
       ansible_user: "{{ backup_server_user }}"
       ansible_ssh_pass: "{{ backup_server_pass }}"
 
-  - debug:
-      var: config
-
   - name: Copy config to backup server
     copy:
       src: "{{ config.backup_path }}"
