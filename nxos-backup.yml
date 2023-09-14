@@ -6,7 +6,7 @@
   tasks:
 
   - name: Backup current config
-    nxos_config:
+    cisco.nxos.nxos_config:
       backup: yes
       backup_options:
         dir_path: /tmp/
